@@ -1,0 +1,526 @@
+/* ---------------------------------------------------------------
+   Design tokens
+   Clinical chart, not a marketing dashboard: paper background,
+   hairline dividers, sectioned panels — no shadowed card kit.
+------------------------------------------------------------------ */
+:root {
+  --paper: #f7f8f6;
+  --panel: #ffffff;
+  --ink: #15241f;
+  --ink-muted: #4d5a54;
+  --structural: #1f3d3a;
+  --accent: #2e6e62;
+  --accent-soft: #e4ede9;
+  --hairline: #d8ddd9;
+  --critical: #b3261e;
+  --critical-soft: #fbebea;
+  --warning: #8a5a00;
+  --warning-soft: #fbf1de;
+
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+  --radius: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Layout
+------------------------------------------------------------------ */
+.app-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 780px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--hairline);
+  }
+}
+
+.sidebar {
+  border-right: 1px solid var(--hairline);
+  background: var(--panel);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--structural);
+  letter-spacing: 0.01em;
+}
+
+.brand-sub {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.main {
+  padding: 32px 40px;
+  max-width: 880px;
+}
+
+@media (max-width: 780px) {
+  .main {
+    padding: 20px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Sections (chart-style, hairline-divided — no card shadows)
+------------------------------------------------------------------ */
+.section {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--panel);
+  margin-bottom: 20px;
+}
+
+.section-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--structural);
+}
+
+.section-meta {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+}
+
+.section-body {
+  padding: 18px 20px;
+}
+
+/* ---------------------------------------------------------------
+   Patient search / list
+------------------------------------------------------------------ */
+.search-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--paper);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+}
+
+select.search-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%234d5a54' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.patient-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.patient-list-item a {
+  display: block;
+  padding: 10px 10px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.patient-list-item a:hover,
+.patient-list-item a.active {
+  background: var(--accent-soft);
+}
+
+.patient-list-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.patient-list-meta {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+}
+
+/* ---------------------------------------------------------------
+   Patient header
+------------------------------------------------------------------ */
+.patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.patient-header h1 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: var(--structural);
+}
+
+.patient-header-meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+/* ---------------------------------------------------------------
+   Buttons
+------------------------------------------------------------------ */
+.btn {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--structural);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+}
+
+.btn-primary:disabled {
+  background: var(--hairline);
+  color: var(--ink-muted);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--hairline);
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  border-color: var(--structural);
+}
+
+/* ---------------------------------------------------------------
+   Symptom input
+------------------------------------------------------------------ */
+.symptom-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.symptom-chip {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.symptom-chip.selected {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--structural);
+  font-weight: 500;
+}
+
+.free-text-area {
+  width: 100%;
+  min-height: 88px;
+  padding: 10px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--ink);
+  resize: vertical;
+  background: var(--paper);
+}
+
+/* ---------------------------------------------------------------
+   Safety flags — the only place red/ochre is used
+------------------------------------------------------------------ */
+.safety-flag {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+
+.safety-flag:last-child {
+  margin-bottom: 0;
+}
+
+.safety-flag.critical {
+  background: var(--critical-soft);
+  color: var(--critical);
+  border: 1px solid var(--critical);
+}
+
+.safety-flag.warning {
+  background: var(--warning-soft);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+.safety-flag-label {
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  white-space: nowrap;
+  padding-top: 1px;
+}
+
+/* ---------------------------------------------------------------
+   Diagnosis panel — ranked candidates with plain score bars
+------------------------------------------------------------------ */
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.candidate-row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hairline);
+  cursor: pointer;
+}
+
+.candidate-row:last-child {
+  border-bottom: none;
+}
+
+.candidate-row.selected .candidate-name {
+  color: var(--accent);
+}
+
+.candidate-top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.candidate-rank {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+  width: 20px;
+}
+
+.candidate-name {
+  font-weight: 500;
+  font-size: 15px;
+  flex: 1;
+}
+
+.candidate-score-value {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  width: 40px;
+  text-align: right;
+}
+
+.score-bar-track {
+  height: 4px;
+  background: var(--hairline);
+  border-radius: 2px;
+  margin-top: 8px;
+  margin-left: 32px;
+}
+
+.score-bar-fill {
+  height: 100%;
+  background: var(--structural);
+  border-radius: 2px;
+}
+
+.candidate-flag-inline {
+  margin-left: 32px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--warning);
+}
+
+/* ---------------------------------------------------------------
+   Evidence / why panels
+------------------------------------------------------------------ */
+.evidence-group-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin: 16px 0 8px 0;
+  text-transform: none;
+}
+
+.evidence-group-label:first-child {
+  margin-top: 0;
+}
+
+.evidence-item {
+  font-size: 13.5px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink);
+}
+
+.evidence-item:last-child {
+  border-bottom: none;
+}
+
+.evidence-source {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.evidence-item.conflict {
+  color: var(--warning);
+}
+
+.uncertainty-note {
+  font-size: 13px;
+  color: var(--warning);
+  background: var(--warning-soft);
+  border: 1px solid var(--warning);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-top: 12px;
+}
+
+.differential-item {
+  font-size: 13.5px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.differential-item:last-child {
+  border-bottom: none;
+}
+
+.differential-name {
+  font-weight: 500;
+}
+
+.differential-feature {
+  color: var(--ink-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Narrative summary — serif, prose
+------------------------------------------------------------------ */
+.narrative {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+}
+
+/* ---------------------------------------------------------------
+   Empty / loading states
+------------------------------------------------------------------ */
+.empty-state {
+  color: var(--ink-muted);
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.error-state {
+  color: var(--critical);
+  font-size: 14px;
+  padding: 10px 0;
+}
